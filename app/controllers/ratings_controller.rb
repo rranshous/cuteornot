@@ -25,9 +25,12 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
+    avg_rating = @rating.image.avg_rating
 
     if params[:redirect_to] == 'random'
-      redirect_to random_show_path
+      @rating.save
+      redirect_to random_show_path,
+                  notice: "Image avg rating: #{avg_rating.round(2)}"
     else
       respond_to do |format|
         if @rating.save

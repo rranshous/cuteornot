@@ -6,4 +6,10 @@ class Image < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   has_many :ratings, dependent: :destroy
+
+  def avg_rating
+    rating_count = self.ratings.length
+    rating_sum = self.ratings.map(&:value).reduce(&:+)
+    rating_sum.to_f / rating_count
+  end
 end
