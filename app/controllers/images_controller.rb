@@ -12,6 +12,7 @@ class ImagesController < ApplicationController
     offset = rand(Image.count)
     # pull the random image and use it to seed the view
     @image = Image.first(:offset => offset)
+    @rating = Rating.new(image: @image)
   end
 
   # GET /images/1
