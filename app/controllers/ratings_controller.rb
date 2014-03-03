@@ -25,30 +25,14 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
-    avg_rating = @rating.image.avg_rating
-
-    if params[:from_random] == 'true'
-      if @rating.save
-        redirect_to random_show_path,
-                    notice: "Image avg rating: #{avg_rating.round(2)}"
-      else
-        redirect_to image_path(@rating.image.id),
-                    alert: "You entered #{@rating.value}. " + \
-                            @rating.errors.full_messages.join('. ')
-      end
+    if @rating.save
+      avg_rating = @rating.image.avg_rating
+      redirect_to random_show_path,
+                  notice: "Prev image avg rating: #{avg_rating.round(2)}"
     else
-      respond_to do |format|
-        if @rating.save
-          format.html { redirect_to @rating,
-                                    notice: 'Rating was successfully created.' }
-          format.json { render action: 'show',
-                               status: :created, location: @rating }
-        else
-          format.html { render action: 'new' }
-          format.json { render json: @rating.errors,
-                               status: :unprocessable_entity }
-        end
-      end
+      redirect_to image_path(@rating.image.id),
+                  alert: "You entered #{@rating.value}. " + \
+                          @rating.errors.full_messages.join('. ')
     end
   end
 
