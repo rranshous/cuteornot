@@ -27,7 +27,7 @@ class RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
 
     if params[:redirect_to] == 'random'
-      redirect_to controller: :images, action: :show_random
+      redirect_to random_show_path
     else
       respond_to do |format|
         if @rating.save
