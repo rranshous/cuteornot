@@ -10,14 +10,15 @@ class ImagesController < ApplicationController
   def show_random
     # choose a random offset between 0 and the # of images
     offset = rand(Image.count)
-    # pull the random image and use it to seed the view
-    @image = Image.first(:offset => offset)
-    @rating = Rating.new(image: @image)
+    # pull the random image and forward to showing it
+    image = Image.first(:offset => offset)
+    redirect_to image
   end
 
   # GET /images/1
   # GET /images/1.json
   def show
+    @rating = Rating.new(image: @image)
   end
 
   # GET /images/new
