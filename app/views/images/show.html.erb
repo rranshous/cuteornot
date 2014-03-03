@@ -1,3 +1,6 @@
+<% content_for(:title) do %>
+  Image <%= @image.id %>
+<% end %>
 
 <% if @last_image %>
   <%= image_tag @last_image.image.url(:thumb) %> 
