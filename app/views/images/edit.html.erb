@@ -1,5 +1,7 @@
 <h1>Editing image</h1>
 
+<%= image_tag @image.image.url(:medium) %>
+<hr/>
 <%= render 'form' %>
 
 <%= link_to 'Show', @image %> |
