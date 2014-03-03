@@ -1,0 +1,2 @@
+gem "paperclip", "~> 4.1"
+Paperclip.options[:command_path] = "/usr/local/bin/" # to dev env
