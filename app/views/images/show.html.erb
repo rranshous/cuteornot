@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
 <%= image_tag @image.image.url(:medium) %>
 
@@ -17,7 +18,7 @@
   <% end %>
 
   <%= f.hidden_field(:image_id) %>
-  <input type="hidden" name="redirect_to" value="random"/>
+  <input type="hidden" name="from_random" value="true"/>
   <div class="field">
     <%= f.number_field :value %>
   </div>

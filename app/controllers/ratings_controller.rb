@@ -27,10 +27,15 @@ class RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
     avg_rating = @rating.image.avg_rating
 
-    if params[:redirect_to] == 'random'
-      @rating.save
-      redirect_to random_show_path,
-                  notice: "Image avg rating: #{avg_rating.round(2)}"
+    if params[:from_random] == 'true'
+      if @rating.save
+        redirect_to random_show_path,
+                    notice: "Image avg rating: #{avg_rating.round(2)}"
+      else
+        redirect_to image_path(@rating.image.id),
+                    alert: "You entered #{@rating.value}. " + \
+                            @rating.errors.full_messages.join('. ')
+      end
     else
       respond_to do |format|
         if @rating.save
