@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303181501) do
+ActiveRecord::Schema.define(version: 20140303183804) do
 
   create_table "images", force: true do |t|
     t.datetime "created_at"
@@ -21,5 +21,14 @@ ActiveRecord::Schema.define(version: 20140303181501) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
+
+  create_table "ratings", force: true do |t|
+    t.integer  "value"
+    t.integer  "image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["image_id"], name: "index_ratings_on_image_id"
 
 end

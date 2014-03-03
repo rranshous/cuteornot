@@ -1,5 +1,7 @@
 Cuteornot::Application.routes.draw do
 
+  resources :ratings
+
   get "images/random", to: "images#show_random", as: "random_show"
   resources :images do
   end
