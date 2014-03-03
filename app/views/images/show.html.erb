@@ -1,3 +1,10 @@
+
+<% if @last_image %>
+  <%= image_tag @last_image.image.url(:thumb) %> 
+  has a rating of <%= @last_image_rating.round(2) %>
+  <hr/>
+<% end %>
+
 <%= image_tag @image.image.url(:medium) %>
 
 <!-- show form for rating the image -->

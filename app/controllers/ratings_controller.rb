@@ -27,8 +27,8 @@ class RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
     if @rating.save
       avg_rating = @rating.image.avg_rating
-      redirect_to random_show_path,
-                  notice: "Prev image avg rating: #{avg_rating.round(2)}"
+      session[:last_image_id] = @rating.image.id
+      redirect_to random_show_path
     else
       redirect_to image_path(@rating.image.id),
                   alert: "You entered #{@rating.value}. " + \

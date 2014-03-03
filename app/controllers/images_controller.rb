@@ -18,6 +18,11 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
+    if session[:last_image_id]
+      @last_image = Image.find(session[:last_image_id])
+      @last_image_rating = @last_image.avg_rating
+      session.delete(:last_image_id)
+    end
     @rating = Rating.new(image: @image)
   end
 
